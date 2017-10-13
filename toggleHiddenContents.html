@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/cssreset.css">
+    <style>
+        .hidden-article {
+            height: 85px;
+            width: 500px;
+            overflow: hidden;
+        }
+        .hidden-article div p{
+            margin-bottom: 20px;
+        }
+        .hidden-box>a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hidden-box">
+        <article class="hidden-article">
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis beatae saepe dicta sed mollitia, laborum ducimus unde accusamus
+                    incidunt! Amet aliquam similique dolorem laudantium culpa, veritatis ducimus corrupti recusandae voluptatibus.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis beatae saepe dicta sed mollitia, laborum ducimus unde accusamus
+                    incidunt! Amet aliquam similique dolorem laudantium culpa, veritatis ducimus corrupti recusandae voluptatibus.
+                </p>
+            </div>
+
+        </article>
+        <a class='hidden-click' href="javascript:;">展开全部</a>
+    </div>
+    <div class="hidden-box">
+        <article class="hidden-article">
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis beatae saepe dicta sed mollitia, laborum ducimus unde accusamus
+                    incidunt! Amet aliquam similique dolorem laudantium culpa, veritatis ducimus corrupti recusandae voluptatibus.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis beatae saepe dicta sed mollitia, laborum ducimus unde accusamus
+                    incidunt! Amet aliquam similique dolorem laudantium culpa, veritatis ducimus corrupti recusandae voluptatibus.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis beatae saepe dicta sed mollitia, laborum ducimus unde accusamus
+                    incidunt! Amet aliquam similique dolorem laudantium culpa, veritatis ducimus corrupti recusandae voluptatibus.
+                </p>
+            </div>
+
+        </article>
+        <a class='hidden-click' href="javascript:;">展开全部</a>
+    </div>
+    <script>
+        $(funciton(){
+            // 原始高度
+            var ogHeight = parseInt($('.hidden-article').css('height'));
+            // 点击后执行
+            $('.hidden-box').on('click','.hidden-click',function() {
+                var click = $(this)
+                var h = click.prev('article').children('div').height();
+                var nowHeight = click.prev('article').height();
+                var articleBox = click.prev('article');
+
+                console.log('div的高度 ' + h + 'px')
+                console.log('原始article的高度 ' + ogHeight + 'px')
+                console.log('当前article的高度 ' + nowHeight + 'px')
+
+
+                if (h === nowHeight) {
+                    // 如果article高度和div高度相等，则回缩
+                    articleBox.animate({
+                        height: ogHeight
+                    }, 'slow', function () {
+                        click.text('展开全部');
+                        console.log(true)
+                    })
+                } else if (h !== nowHeight) {
+                    // 如果article高度和div高度不等，则展开
+                    articleBox.animate({
+                        height: h
+                    }, 'slow', function () {
+                        click.text('收起文章');
+                        console.log(false)
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
